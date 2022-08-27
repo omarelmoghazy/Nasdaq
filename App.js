@@ -1,20 +1,61 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useState } from "react";
+import { useFonts } from "./src/hooks/useFonts";
+import SplashScreen from "./src/screens/SpashScreen";
+import { LinearGradient } from "expo-linear-gradient";
+
+import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+const Stack = createNativeStackNavigator();
+const mainTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: "transparent",
+  },
+};
 
 export default function App() {
+  const [appIsReady, setAppIsReady] = useState(false);
+  const [fontsIsReady, setFontsIsReady] = useState(false);
+
+  useEffect(() => {
+    async function prepare() {
+      try {
+        await useFonts();
+        setFontsIsReady(true);
+      } catch (e) {
+        console.warn(e);
+      } finally {
+        setAppIsReady(true);
+      }
+    }
+
+    prepare();
+  }, []);
+
+  if (!appIsReady) {
+    if (fontsIsReady) return <SplashScreen />;
+    else return null;
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <LinearGradient
+      start={{ x: 3, y: 0 }}
+      end={{ x: -2, y: 1 }}
+      locations={[0.5, 0.5]}
+      colors={["#439dff", "#4197ff"]}
+      style={{ flex: 1 }}
+    >
+      <NavigationContainer theme={mainTheme}>
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+          }}
+        >
+          <Stack.Screen name="Home" component={SplashScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </LinearGradient>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
