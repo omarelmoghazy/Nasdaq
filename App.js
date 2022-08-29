@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useFonts } from "./src/hooks/useFonts";
-import SplashScreen from "./src/screens/SpashScreen";
 import { LinearGradient } from "expo-linear-gradient";
 
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import SplashScreen from "./src/screens/SpashScreen";
+import ExploreScreen from "./src/screens/ExploreScreen";
 
 const Stack = createNativeStackNavigator();
 const mainTheme = {
@@ -53,7 +54,7 @@ export default function App() {
             headerShown: false,
           }}
         >
-          <Stack.Screen name="Home" component={SplashScreen} />
+          <Stack.Screen name="Explore" component={ExploreScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </LinearGradient>
