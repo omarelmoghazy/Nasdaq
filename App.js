@@ -6,6 +6,7 @@ import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import SplashScreen from "./src/screens/SpashScreen";
 import ExploreScreen from "./src/screens/ExploreScreen";
+import StockDetailsScreen from "./src/screens/StockDetailsScreen";
 
 const Stack = createNativeStackNavigator();
 const mainTheme = {
@@ -54,7 +55,8 @@ export default function App() {
             headerShown: false,
           }}
         >
-          <Stack.Screen name="Explore" component={ExploreScreen} />
+          {/* <Stack.Screen name="Explore" component={ExploreScreen} /> */}
+          <Stack.Screen name="StockDetails" component={StockDetailsScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </LinearGradient>
