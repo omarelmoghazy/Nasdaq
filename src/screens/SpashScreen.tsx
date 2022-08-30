@@ -1,8 +1,8 @@
-import * as React from "react";
-import { Animated, View } from "react-native";
+import * as React from 'react';
+import { Animated, View } from 'react-native';
 
-import styled from "styled-components/native";
-import { SplashScreenLogo } from "../../assets/assets";
+import styled from 'styled-components/native';
+import { SplashScreenLogo } from '../../assets/assets';
 
 const LogoContainer = styled.View`
   justify-content: center;
@@ -35,7 +35,7 @@ const DeveloperContainer = styled.View`
 
 const Credits = styled.Text`
   color: white;
-  font-family: "PoppinsRegular";
+  font-family: 'PoppinsRegular';
   font-size: 18px;
 `;
 
