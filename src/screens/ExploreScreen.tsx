@@ -1,70 +1,57 @@
-import React, { Fragment } from "react";
-import {
-  FlatList,
-  Keyboard,
-  SafeAreaView,
-  Text,
-  TouchableWithoutFeedback,
-  View,
-} from "react-native";
-import { Feather } from "@expo/vector-icons";
-import styled from "styled-components/native";
-import StockCard from "../components/StockCard";
-
-interface Stock {
-  item: {
-    ticker: string;
-    name: string;
-  };
-}
+import React, { Fragment } from 'react';
+import { Keyboard } from 'react-native';
+import { Feather } from '@expo/vector-icons';
+import styled from 'styled-components/native';
+import StockCard from '../components/StockCard';
+import { FlexSafeAreaView } from '../shared-styles';
 
 const stocks = [
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
-  { ticker: "AAPL", name: "Apple Inc." },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
+  { ticker: 'AAPL', name: 'Apple Inc.' },
 ];
 
 const ScreenContainer = styled.TouchableWithoutFeedback.attrs({
@@ -72,11 +59,10 @@ const ScreenContainer = styled.TouchableWithoutFeedback.attrs({
   accessible: false,
 })`
   height: 100%;
-  background-color: transparent;
 `;
 
 const HeaderSafeAreaView = styled.SafeAreaView`
-  background-color: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.2);
 `;
 
 const SearchContainer = styled.View`
@@ -94,24 +80,20 @@ const SearchBar = styled.View`
 `;
 
 const SearchBarInput = styled.TextInput.attrs({
-  placeholder: "Search",
-  placeholderTextColor: "#fff",
+  placeholder: 'Search',
+  placeholderTextColor: '#fff',
 })`
   flex: 1;
   margin-left: 10px;
   font-size: 16px;
-  font-family: "PoppinsRegular";
+  font-family: 'PoppinsRegular';
   color: #fff;
-`;
-
-const ContentSafeAreaView = styled.SafeAreaView`
-  flex: 1;
 `;
 
 const ContentContainer = styled.FlatList.attrs((props) => ({
   data: stocks,
-  renderItem: ({ item }: Stock) => {
-    return <StockCard ticker={item.ticker} name={item.name} />;
+  renderItem: ({ item, index }) => {
+    return <StockCard key={index} ticker={item.ticker} name={item.name} withBorder />;
   },
 }))`
   padding: 0 30px;
@@ -129,9 +111,9 @@ const ExploreScreen = () => {
             </SearchBar>
           </SearchContainer>
         </HeaderSafeAreaView>
-        <ContentSafeAreaView>
+        <FlexSafeAreaView>
           <ContentContainer />
-        </ContentSafeAreaView>
+        </FlexSafeAreaView>
       </Fragment>
     </ScreenContainer>
   );
