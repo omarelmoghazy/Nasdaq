@@ -12,14 +12,9 @@ const LogoContainer = styled.View`
   position: relative;
 `;
 
-interface ImageProps {
-  readonly scale: Animated.Value;
-}
-
-const Logo = styled(Animated.Image).attrs((props: ImageProps) => ({
+const Logo = styled(Animated.Image).attrs({
   source: SplashScreenLogo,
-  scale: props.scale,
-}))`
+})`
   height: 200px;
   width: 200px;
   resize-mode: contain;
@@ -42,7 +37,7 @@ const Credits = styled.Text`
 const SplashScreen = () => {
   const startValueAnimated = new Animated.Value(1);
   const startValue = 1;
-  const endValue = 1.05;
+  const endValue = 1.1;
 
   React.useEffect(() => {
     Animated.loop(
