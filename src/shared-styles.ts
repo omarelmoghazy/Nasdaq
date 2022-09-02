@@ -19,4 +19,5 @@ export const SmallPaleWhitText = styled.Text`
 
 export const FlexSafeAreaView = styled.SafeAreaView`
   flex: 1;
+  position: relative;
 `;
