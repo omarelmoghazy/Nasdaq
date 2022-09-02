@@ -43,10 +43,6 @@ const StockInfoFieldContent = styled.Text`
   text-overflow: inherit;
 `;
 
-const DescriptionScrollView = styled.ScrollView`
-  height: 135px;
-`;
-
 const StockInfo = ({ industry, description }: StockInfoProps) => {
   return (
     <StockInfoContainer>
