@@ -27,12 +27,17 @@ const BarInput = styled.TextInput.attrs({
   color: #fff;
 `;
 
-const SearchBar = () => {
+interface SearchBarProps {
+  value: string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const SearchBar = ({ value, setValue }: SearchBarProps) => {
   return (
     <SearchBarContainer>
       <Bar>
         <Feather name="search" size={20} color="white" />
-        <BarInput />
+        <BarInput value={value} onChangeText={setValue} />
       </Bar>
     </SearchBarContainer>
   );
