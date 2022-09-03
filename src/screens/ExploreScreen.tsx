@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect, useMemo } from 'react';
 import { ActivityIndicator, Keyboard } from 'react-native';
 import styled from 'styled-components/native';
 import StockCard from '../components/StockCard';
@@ -9,6 +9,7 @@ import SplashScreen from './SplashScreen';
 import SearchBar from '../components/SearchBar';
 import Error from '../components/Error';
 import TryAgainBtn from '../components/TryAgainBtn';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ScreenContainer = styled.TouchableWithoutFeedback.attrs({
   onPress: Keyboard.dismiss,
@@ -21,12 +22,7 @@ const HeaderSafeAreaView = styled.SafeAreaView`
   background: rgba(0, 0, 0, 0.2);
 `;
 
-const ContentContainer = styled.FlatList.attrs((props: { tickers: Ticker[] }) => ({
-  data: props.tickers,
-  renderItem: ({ item, index }) => {
-    return <StockCard key={index} ticker={item.ticker} name={item.name} withBorder />;
-  },
-}))`
+const ContentContainer = styled.FlatList`
   padding: 0 30px;
 `;
 
@@ -35,27 +31,26 @@ const LoadMoreIndicatorContainer = styled.View`
 `;
 
 const ExploreScreen = () => {
-  const [limit, setLimit] = useState<number>(0);
   const [isLoadingScreen, setIsLoadingScreen] = useState<boolean>(true);
   const [showErrorMessage, setShowErrorMessage] = useState<boolean>(false);
   const [showTryAgainBtn, setShowTryAgainBtn] = useState<boolean>(false);
   const [showLoadMore, setShowLoadMore] = useState<boolean>(false);
   const [reachedEnd, setReachedEnd] = useState<boolean>(false);
+  const [searchValue, setSearchValue] = useState<string>('');
   const actions = useActions();
   const state = useAppState();
 
-  const fetchData = async () => {
+  const fetchData = async (isCaching: boolean, newSearch?: boolean) => {
+    setShowErrorMessage(false);
+    setShowTryAgainBtn(false);
     setShowLoadMore(true);
     try {
-      const response = await actions.loadTickers(limit + 20);
+      const response = await actions.loadTickers({ searchValue, isCaching, newSearch });
       setIsLoadingScreen(false);
       setShowLoadMore(false);
-      console.log('RESPONSE:', response);
       if (!response) {
         setShowErrorMessage(true);
         setShowTryAgainBtn(true);
-      } else {
-        setLimit((prevLimit) => prevLimit + 20);
       }
     } catch (error) {}
   };
@@ -65,7 +60,7 @@ const ExploreScreen = () => {
 
   const onMomentumScrollEndHandler = () => {
     if (reachedEnd) {
-      fetchData();
+      fetchData(false);
       setReachedEnd(false);
     }
   };
@@ -73,17 +68,28 @@ const ExploreScreen = () => {
   const onTryAgainHandler = () => {
     setShowErrorMessage(false);
     setShowTryAgainBtn(false);
-    fetchData();
+    fetchData(false);
+  };
+
+  const renderStock = ({ item, index }) => {
+    return <StockCard key={index} ticker={item.ticker} name={item.name} withBorder />;
   };
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      fetchData();
-    }, 2000);
-    return () => {
-      clearTimeout(timer);
-    };
-  }, []);
+    if (searchValue === '') {
+      const timer = setTimeout(() => {
+        fetchData(true);
+      }, 2000);
+      return () => {
+        clearTimeout(timer);
+      };
+    } else {
+      const delayedSearch = setTimeout(() => {
+        fetchData(false, true);
+      }, 1000);
+      return () => clearTimeout(delayedSearch);
+    }
+  }, [searchValue]);
 
   return (
     <>
@@ -93,13 +99,14 @@ const ExploreScreen = () => {
         <ScreenContainer>
           <Fragment>
             <HeaderSafeAreaView>
-              <SearchBar />
+              <SearchBar value={searchValue} setValue={setSearchValue} />
             </HeaderSafeAreaView>
             <FlexSafeAreaView>
               <ContentContainer
                 onMomentumScrollEnd={onMomentumScrollEndHandler}
                 onEndReached={onEndReachedHandler}
-                tickers={state.tickers}
+                data={state.tickers}
+                renderItem={renderStock}
               />
               {showErrorMessage && <Error setShowErrorMessage={setShowErrorMessage} />}
               {showLoadMore && (

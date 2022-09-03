@@ -6,10 +6,9 @@ export const api = {
     try {
       response = await axios.get(
         `https://api.polygon.io/v3/reference/tickers?${
-          searchValue ? `search=${searchValue}&` : ''
+          searchValue !== '' ? `search=${searchValue}&` : ''
         }active=true&sort=ticker&order=asc&limit=${limit}&apiKey=P7FmkQEtx3oxbcjnh6rwa1kFZF0MQPCC`
       );
-
       if (response.data.status !== 'OK') {
         return null;
       } else {
