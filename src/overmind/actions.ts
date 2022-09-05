@@ -1,3 +1,4 @@
+import { Context } from './index';
 import { Ticker } from './state';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -10,13 +11,14 @@ interface LoadTickersQueryParams {
 }
 
 export const loadTickers = async (
-  { effects, state },
+  { effects, state }: Context,
   { searchValue, isCaching, newSearch }: LoadTickersQueryParams
 ) => {
   try {
     if (isCaching) {
-      const cachedTickers = JSON.parse(await AsyncStorage.getItem('tickers'));
-      if (cachedTickers !== null) {
+      const cachedTickersJson = await AsyncStorage.getItem('tickers');
+      if (cachedTickersJson !== null) {
+        const cachedTickers = JSON.parse(cachedTickersJson);
         state.tickers = cachedTickers;
         return 'CACHED';
       }
