@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { Animated, Linking, Text, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
+import { Animated, Linking, TouchableOpacity } from 'react-native';
 import styled from 'styled-components/native';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -10,7 +10,7 @@ const ErrorContainer = styled(Animated.View)`
   padding: 15px;
   align-self: center;
   position: absolute;
-  top: ${(props: { withSearchBar: boolean }) => (props.withSearchBar ? '20px' : '40px')};
+  top: ${(props: { withSearchBar?: boolean }) => (props.withSearchBar ? '20px' : '60px')};
 `;
 
 const ErrorText = styled.Text`
@@ -30,7 +30,7 @@ const CloseIconContainer = styled.View`
 `;
 
 interface ErrorProps {
-  withSearchBar: boolean;
+  withSearchBar?: boolean;
   setShowErrorMessage: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
