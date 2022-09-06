@@ -10,6 +10,9 @@ import SearchBar from '../components/SearchBar';
 import Error from '../components/Error';
 import TryAgainBtn from '../components/TryAgainBtn';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../App';
+import useError from '../hooks/useError';
 
 const ScreenContainer = styled.TouchableWithoutFeedback.attrs({
   onPress: Keyboard.dismiss,
@@ -26,14 +29,15 @@ const ContentContainer = styled.FlatList`
   padding: 0 30px;
 `;
 
-const LoadMoreIndicatorContainer = styled.View`
+const LoadMoreIndicator = styled.ActivityIndicator`
   margin-top: 10px;
 `;
 
-const ExploreScreen = () => {
+type ExploreScreenProps = NativeStackScreenProps<RootStackParamList, 'Explore'>;
+
+const ExploreScreen = ({ navigation }: ExploreScreenProps) => {
   const [isLoadingScreen, setIsLoadingScreen] = useState<boolean>(true);
-  const [showErrorMessage, setShowErrorMessage] = useState<boolean>(false);
-  const [showTryAgainBtn, setShowTryAgainBtn] = useState<boolean>(false);
+  const { showErrorMessage, setShowErrorMessage, showTryAgainBtn, setShowTryAgainBtn } = useError();
   const [showLoadMore, setShowLoadMore] = useState<boolean>(false);
   const [reachedEnd, setReachedEnd] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState<string>('');
@@ -71,8 +75,8 @@ const ExploreScreen = () => {
     fetchData(false);
   };
 
-  const renderStock = ({ item, index }) => {
-    return <StockCard key={index} ticker={item.ticker} name={item.name} withBorder />;
+  const renderStock = ({ item, index }: { item: Ticker; index: number }) => {
+    return <StockCard navigation={navigation} key={index} stock={item} withBorder />;
   };
 
   useEffect(() => {
@@ -87,7 +91,9 @@ const ExploreScreen = () => {
       const delayedSearch = setTimeout(() => {
         fetchData(false, true);
       }, 1000);
-      return () => clearTimeout(delayedSearch);
+      return () => {
+        clearTimeout(delayedSearch);
+      };
     }
   }, [searchValue]);
 
@@ -108,12 +114,10 @@ const ExploreScreen = () => {
                 data={state.tickers}
                 renderItem={renderStock}
               />
-              {showErrorMessage && <Error setShowErrorMessage={setShowErrorMessage} />}
-              {showLoadMore && (
-                <LoadMoreIndicatorContainer>
-                  <ActivityIndicator color={'#ffffff'} />
-                </LoadMoreIndicatorContainer>
+              {showErrorMessage && (
+                <Error withSearchBar setShowErrorMessage={setShowErrorMessage} />
               )}
+              {showLoadMore && <LoadMoreIndicator color={'#ffffff'} />}
               {showTryAgainBtn && <TryAgainBtn onPress={onTryAgainHandler} />}
             </FlexSafeAreaView>
           </Fragment>

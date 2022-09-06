@@ -66,6 +66,7 @@ export default function App() {
             initialRouteName="Explore"
             screenOptions={{
               headerShown: false,
+              animation: 'none',
             }}
           >
             <Stack.Screen name="Explore" component={ExploreScreen} />
