@@ -1,4 +1,5 @@
 import React from 'react';
+import { Linking } from 'react-native';
 import styled from 'styled-components/native';
 import {
   SmallPaleWhitText,
@@ -7,8 +8,9 @@ import {
 } from '../shared-styles';
 
 interface StockInfoProps {
-  industry: string;
-  description: string;
+  industry: string | undefined;
+  description: string | undefined;
+  link: string;
 }
 
 const StockInfoContainer = styled(StockDetailsSectionContainer)`
@@ -43,22 +45,30 @@ const StockInfoFieldContent = styled.Text`
   text-overflow: inherit;
 `;
 
-const StockInfo = ({ industry, description }: StockInfoProps) => {
+const StockInfo = ({ industry, description, link }: StockInfoProps) => {
+  const onVisitWebsiteHandler = () => {
+    Linking.openURL(link);
+  };
+
   return (
     <StockInfoContainer>
       <StockInfoHeader>
         <StockDetailsSectionHeader>About</StockDetailsSectionHeader>
-        <VisitWebsiteContainer>
-          <VisitWebsiteText>Visit Website</VisitWebsiteText>
-        </VisitWebsiteContainer>
+        {link && (
+          <VisitWebsiteContainer onPress={onVisitWebsiteHandler}>
+            <VisitWebsiteText>Visit Website</VisitWebsiteText>
+          </VisitWebsiteContainer>
+        )}
       </StockInfoHeader>
       <StockInfoFieldContainer>
         <SmallPaleWhitText>Industry</SmallPaleWhitText>
-        <StockInfoFieldContent>{industry}</StockInfoFieldContent>
+        <StockInfoFieldContent>{industry || '**Unknown Industry**'}</StockInfoFieldContent>
       </StockInfoFieldContainer>
       <StockInfoFieldContainer>
         <SmallPaleWhitText>Description</SmallPaleWhitText>
-        <StockInfoFieldContent>{description}</StockInfoFieldContent>
+        <StockInfoFieldContent>
+          {description || '**No available description**'}
+        </StockInfoFieldContent>
       </StockInfoFieldContainer>
     </StockInfoContainer>
   );

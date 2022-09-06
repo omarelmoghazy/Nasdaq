@@ -1,6 +1,9 @@
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import styled from 'styled-components/native';
+import { RootStackParamList } from '../../App';
+import { Ticker } from '../overmind/state';
 import { SmallPaleWhitText } from '../shared-styles';
 
 interface StockCardContainerProps {
@@ -24,17 +27,25 @@ const StockTicker = styled(StockCardText)`
 `;
 
 interface StockCardProps {
-  ticker: string;
-  name: string;
+  stock: Ticker;
   withBorder?: boolean;
+  navigation?: NativeStackNavigationProp<RootStackParamList, 'Explore', undefined>;
 }
 
-const StockCard = ({ ticker, name, withBorder }: StockCardProps) => {
+const StockCard = ({ stock, withBorder, navigation }: StockCardProps) => {
+  const onTickerPressHandler = () => {
+    if (navigation) {
+      navigation.navigate('StockDetails', {
+        stock: stock,
+      });
+    }
+  };
+
   return (
     <StockCardContainer withBorder={withBorder}>
-      <TouchableOpacity>
-        <StockTicker>{ticker}</StockTicker>
-        <SmallPaleWhitText>{name}</SmallPaleWhitText>
+      <TouchableOpacity onPress={onTickerPressHandler}>
+        <StockTicker>{stock.ticker}</StockTicker>
+        <SmallPaleWhitText>{stock.name}</SmallPaleWhitText>
       </TouchableOpacity>
     </StockCardContainer>
   );

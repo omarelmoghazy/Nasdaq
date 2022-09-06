@@ -11,7 +11,7 @@ interface StockValueProps {
 }
 
 interface StockPriceProps {
-  value: string;
+  value: number | string;
   bolded?: boolean;
   valueFontSize?: string;
   raiseUpwards?: boolean;
