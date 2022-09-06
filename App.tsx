@@ -10,10 +10,14 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SplashScreen from './src/screens/SplashScreen';
 import ExploreScreen from './src/screens/ExploreScreen';
 import StockDetailsScreen from './src/screens/StockDetailsScreen';
+import { Ticker } from './src/overmind/state';
 
-const overmind = createOvermind(config, { devtools: false });
+export type RootStackParamList = {
+  Explore: undefined;
+  StockDetails: { stock: Ticker };
+};
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 const mainTheme = {
   ...DefaultTheme,
   colors: {
@@ -21,6 +25,8 @@ const mainTheme = {
     background: 'transparent',
   },
 };
+
+const overmind = createOvermind(config, { devtools: false });
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -57,12 +63,14 @@ export default function App() {
       >
         <NavigationContainer theme={mainTheme}>
           <Stack.Navigator
+            initialRouteName="Explore"
             screenOptions={{
               headerShown: false,
+              animation: 'none',
             }}
           >
             <Stack.Screen name="Explore" component={ExploreScreen} />
-            {/* <Stack.Screen name="StockDetails" component={StockDetailsScreen} /> */}
+            <Stack.Screen name="StockDetails" component={StockDetailsScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </LinearGradient>

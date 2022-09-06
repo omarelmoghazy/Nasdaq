@@ -1,56 +1,37 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import {
-  SmallPaleWhitText,
-  StockDetailsSectionContainer,
-  StockDetailsSectionHeader,
-} from '../shared-styles';
-import StockPrice from './StockPrice';
+import { StockStatistics as StockStatisticsType } from '../overmind/state';
+import { StockDetailsSectionContainer, StockDetailsSectionHeader } from '../shared-styles';
+import StockStatisticsField from './StockStatisticsField';
 
-const stockDetails = {
-  open: '142.01',
-  close: '142.01',
-  volume: '11.3b',
-  high: '147.21',
-  low: '140.35',
-};
-
-interface StockStatisticsFieldProps {
-  index: number;
-}
-
-const StockStatisticsField = styled.View`
-  margin-left: ${(props: StockStatisticsFieldProps) =>
-    props.index === 0 || props.index === 3 ? '0px' : '80px'};
-  margin-bottom: 20px;
-`;
-
-const StockStatisticsContentContainer = styled.View`
-  flex-direction: row;
-  flex-wrap: wrap;
+const StockStockStatisticsContentContainer = styled.View`
   margin-top: 20px;
 `;
 
-const StockStatistics = () => {
+const StockStatisticsContentRow = styled.View`
+  flex-direction: row;
+`;
+
+interface StockStatisticsProps {
+  statistics: StockStatisticsType;
+}
+
+const StockStatistics = ({ statistics }: StockStatisticsProps) => {
   const renderDetails = () => {
     return (
-      <StockStatisticsContentContainer>
-        {Object.entries(stockDetails)
-          .map(([key, value]) => ({ key, value }))
-          .map((detail, index) => {
-            return (
-              <StockStatisticsField key={index} index={index}>
-                <SmallPaleWhitText>{detail.key}</SmallPaleWhitText>
-                <StockPrice
-                  value={detail.value}
-                  valueFontSize={'20px'}
-                  dollarSign={detail.key !== 'volume'}
-                  dollarSignFontSize={'10px'}
-                />
-              </StockStatisticsField>
-            );
-          })}
-      </StockStatisticsContentContainer>
+      <StockStockStatisticsContentContainer>
+        <StockStatisticsContentRow>
+          <StockStatisticsField title={'Open'} value={statistics?.o || 'N/A'} />
+          <StockStatisticsField title={'Close'} value={statistics?.c || 'N/A'} />
+        </StockStatisticsContentRow>
+        <StockStatisticsContentRow>
+          <StockStatisticsField title={'High'} value={statistics?.h || 'N/A'} />
+          <StockStatisticsField title={'Low'} value={statistics?.l || 'N/A'} />
+        </StockStatisticsContentRow>
+        <StockStatisticsContentRow>
+          <StockStatisticsField title={'Volume'} value={statistics?.v || 'N/A'} />
+        </StockStatisticsContentRow>
+      </StockStockStatisticsContentContainer>
     );
   };
 

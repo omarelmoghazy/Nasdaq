@@ -13,16 +13,35 @@ export type Ticker = {
   last_updated_utc: string;
 };
 
-// type StockDetails = {
+export type StockStatistics = null | {
+  T: string;
+  v: number;
+  vw: number;
+  o: number;
+  c: number;
+  h: number;
+  l: number;
+  t: number;
+  n: number;
+};
 
-// }
+type StockDetails = null | {
+  sic_description: string;
+  description: string;
+  homepage_url: string;
+  branding: { logo_url: string; icon_url: string };
+};
 
 type State = {
   tickers: Ticker[];
-  //   stock: StockDetails;
+  chosenStockStatistics: StockStatistics;
+  chosenStockDetails: StockDetails;
+  chosenStockLogo: any;
 };
 
 export const state: State = {
   tickers: [],
-  //   stock: null,
+  chosenStockStatistics: null,
+  chosenStockDetails: null,
+  chosenStockLogo: null,
 };
