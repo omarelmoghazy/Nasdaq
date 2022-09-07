@@ -7,6 +7,9 @@ import {
 import { Ticker } from '../overmind/state';
 import ExploreScreen from '../screens/ExploreScreen';
 import StockDetailsScreen from '../screens/StockDetailsScreen';
+import { Provider } from 'overmind-react';
+import { createOvermind } from 'overmind';
+import { config } from '../overmind';
 
 export type RootStackParamList = {
   Explore: undefined;
@@ -22,18 +25,22 @@ const mainTheme = {
   },
 };
 
+const overmind = createOvermind(config, { devtools: false });
+
 const AppNavigator = () => {
   const navigatorOptions: NativeStackNavigationOptions = {
     headerShown: false,
     animation: 'none',
   };
   return (
-    <NavigationContainer theme={mainTheme}>
-      <Stack.Navigator initialRouteName="Explore" screenOptions={navigatorOptions}>
-        <Stack.Screen name="Explore" component={ExploreScreen} />
-        <Stack.Screen name="StockDetails" component={StockDetailsScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider value={overmind}>
+      <NavigationContainer theme={mainTheme}>
+        <Stack.Navigator initialRouteName="Explore" screenOptions={navigatorOptions}>
+          <Stack.Screen name="Explore" component={ExploreScreen} />
+          <Stack.Screen name="StockDetails" component={StockDetailsScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 };
 
