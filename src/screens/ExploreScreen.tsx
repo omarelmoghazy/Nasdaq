@@ -11,8 +11,8 @@ import Error from '../components/Error';
 import TryAgainBtn from '../components/TryAgainBtn';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../App';
 import useError from '../hooks/useError';
+import { RootStackParamList } from '../components/AppNavigator';
 
 const ScreenContainer = styled.TouchableWithoutFeedback.attrs({
   onPress: Keyboard.dismiss,

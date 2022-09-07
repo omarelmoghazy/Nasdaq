@@ -2,9 +2,9 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import styled from 'styled-components/native';
-import { RootStackParamList } from '../../App';
 import { Ticker } from '../overmind/state';
 import { SmallPaleWhitText } from '../shared-styles';
+import { RootStackParamList } from './AppNavigator';
 
 interface StockCardContainerProps {
   withBorder: boolean;

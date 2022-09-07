@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { ActivityIndicator } from 'react-native';
 import styled from 'styled-components/native';
-import { RootStackParamList } from '../../App';
 import { UnavailableLogo } from '../../assets/assets';
 import Error from '../components/Error';
 import StockCard from '../components/StockCard';
@@ -15,6 +14,7 @@ import { useActions, useAppState } from '../overmind';
 import { FlexSafeAreaView } from '../shared-styles';
 import SplashScreen from './SplashScreen';
 import ErrorScreen from './ErrorScreen';
+import { RootStackParamList } from '../components/AppNavigator';
 
 const ScreenScrollView = styled.ScrollView.attrs({
   contentContainerStyle: {
