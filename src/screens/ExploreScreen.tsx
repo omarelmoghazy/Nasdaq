@@ -90,7 +90,7 @@ const ExploreScreen = ({ navigation }: ExploreScreenProps) => {
     } else {
       const delayedSearch = setTimeout(() => {
         fetchData(false, true);
-      }, 1000);
+      }, 500);
       return () => {
         clearTimeout(delayedSearch);
       };
