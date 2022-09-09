@@ -16,10 +16,7 @@ const Bar = styled.View`
   padding: 10px;
 `;
 
-const BarInput = styled.TextInput.attrs({
-  placeholder: 'Search',
-  placeholderTextColor: '#fff',
-})`
+const BarInput = styled.TextInput`
   flex: 1;
   margin-left: 10px;
   font-size: 16px;
@@ -37,7 +34,12 @@ const SearchBar = ({ value, setValue }: SearchBarProps) => {
     <SearchBarContainer>
       <Bar>
         <Feather name="search" size={20} color="white" />
-        <BarInput value={value} onChangeText={setValue} />
+        <BarInput
+          placeholder="Search"
+          placeholderTextColor="#ffffff"
+          value={value}
+          onChangeText={setValue}
+        />
       </Bar>
     </SearchBarContainer>
   );

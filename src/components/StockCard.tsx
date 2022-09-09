@@ -43,7 +43,7 @@ const StockCard = ({ stock, withBorder, navigation }: StockCardProps) => {
 
   return (
     <StockCardContainer withBorder={withBorder}>
-      <TouchableOpacity onPress={onTickerPressHandler}>
+      <TouchableOpacity onPress={onTickerPressHandler} testID={'stock-card-test'}>
         <StockTicker>{stock.ticker}</StockTicker>
         <SmallPaleWhitText>{stock.name}</SmallPaleWhitText>
       </TouchableOpacity>
