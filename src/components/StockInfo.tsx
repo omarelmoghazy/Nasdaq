@@ -1,6 +1,7 @@
 import React from 'react';
 import { Linking } from 'react-native';
 import styled from 'styled-components/native';
+import COLORS from '../../assets/colors';
 import {
   SmallPaleWhitText,
   StockDetailsSectionContainer,
@@ -25,11 +26,11 @@ const StockInfoHeader = styled.View`
 
 const VisitWebsiteContainer = styled.TouchableOpacity`
   border-bottom-width: 2px;
-  border-bottom-color: #00004d;
+  border-bottom-color: ${COLORS.DARK_BLUE};
 `;
 
 const VisitWebsiteText = styled.Text`
-  color: #00004d;
+  color: ${COLORS.DARK_BLUE};
   font-size: 12px;
   font-family: 'PoppinsRegular';
 `;
@@ -39,7 +40,7 @@ const StockInfoFieldContainer = styled.View`
 `;
 
 const StockInfoFieldContent = styled.Text`
-  color: #fff;
+  color: ${COLORS.WHITE};
   font-size: 16px;
   font-family: 'PoppinsRegular';
   text-overflow: inherit;

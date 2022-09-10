@@ -15,6 +15,7 @@ import { FlexSafeAreaView } from '../shared-styles';
 import SplashScreen from './SplashScreen';
 import ErrorScreen from './ErrorScreen';
 import { RootStackParamList } from '../components/AppNavigator';
+import COLORS from '../../assets/colors';
 
 const ScreenScrollView = styled.ScrollView.attrs({
   contentContainerStyle: {
@@ -25,7 +26,7 @@ const ScreenScrollView = styled.ScrollView.attrs({
 
 const StockLogoContainer = styled.View`
   border-radius: 5px;
-  background: rgba(255, 255, 255, 0.3);
+  background: ${COLORS.EXTRA_PALE_WHITE};
   margin-top: 10px;
   height: 25px;
   width: 25px;
@@ -106,7 +107,7 @@ const StockDetailsScreen = ({ route }: StockDetailsScreenProps) => {
       ) : (
         <FlexSafeAreaView>
           {isLoadingData ? (
-            <ActivityIndicator color={'#ffffff'} />
+            <ActivityIndicator color={COLORS.WHITE} />
           ) : (
             <ScreenScrollView>
               <StockLogoContainer>

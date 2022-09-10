@@ -1,20 +1,21 @@
 import styled from 'styled-components/native';
+import COLORS from '../assets/colors';
 
 export const StockDetailsSectionContainer = styled.View`
   width: 100%;
   padding: 25px;
-  background: rgba(0, 0, 0, 0.2);
+  background: ${COLORS.EXTRA_PALE_BLACK};
 `;
 
 export const StockDetailsSectionHeader = styled.Text`
   font-size: 22px;
   font-family: 'PoppinsRegular';
-  color: #fff;
+  color: ${COLORS.WHITE};
 `;
 
 export const SmallPaleWhitText = styled.Text`
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.6);
+  color: ${COLORS.PALE_WHITE};
 `;
 
 export const FlexSafeAreaView = styled.SafeAreaView`

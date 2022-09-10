@@ -3,6 +3,7 @@ import { Animated, View } from 'react-native';
 
 import styled from 'styled-components/native';
 import { SplashScreenLogo } from '../../assets/assets';
+import COLORS from '../../assets/colors';
 
 const LogoContainer = styled.View`
   justify-content: center;
@@ -29,7 +30,7 @@ const DeveloperContainer = styled.View`
 `;
 
 const Credits = styled.Text`
-  color: white;
+  color: ${COLORS.WHITE};
   font-family: 'PoppinsRegular';
   font-size: 18px;
 `;
