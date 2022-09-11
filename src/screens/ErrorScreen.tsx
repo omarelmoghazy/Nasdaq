@@ -11,7 +11,7 @@ const ErrorImageContainer = styled.View`
 
 const ErrorImage = styled.Image`
   width: 300px;
-  height: 300px;
+  height: 200px;
   resize-mode: contain;
 `;
 
