@@ -33,6 +33,7 @@ The app is a stock market app. It should show all stocks listed in Nasdaq exchan
 ##### Install dependencies
 - Install Node. js and NPM if not installed. Follow this [link](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm "link").
 - Install Yarn. Follow this [link](https://classic.yarnpkg.com/lang/en/docs/install/#windows-stable "link").
+- Download **Expo Go** app on your mobile phone to test it on your device.
 
 ##### In your project directory
 ###### Install packages
@@ -40,3 +41,7 @@ The app is a stock market app. It should show all stocks listed in Nasdaq exchan
 
 ###### Run app
 `yarn start`
+
+###### Render app on your device
+Scan the QR code provided in your terminal using your mobile phone.
+
