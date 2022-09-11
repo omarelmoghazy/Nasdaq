@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { ActivityIndicator } from 'react-native';
 import styled from 'styled-components/native';
-import { UnavailableLogo } from '../../assets/assets';
 import Error from '../components/Error';
 import StockCard from '../components/StockCard';
 import StockInfo from '../components/StockInfo';
@@ -16,6 +15,7 @@ import SplashScreen from './SplashScreen';
 import ErrorScreen from './ErrorScreen';
 import { RootStackParamList } from '../components/AppNavigator';
 import COLORS from '../../assets/colors';
+import StockLogo from '../components/StockLogo';
 
 const ScreenScrollView = styled.ScrollView.attrs({
   contentContainerStyle: {
@@ -23,21 +23,6 @@ const ScreenScrollView = styled.ScrollView.attrs({
     alignItems: 'center',
   },
 })``;
-
-const StockLogoContainer = styled.View`
-  border-radius: 5px;
-  background: ${COLORS.EXTRA_PALE_WHITE};
-  margin-top: 10px;
-  height: 25px;
-  width: 25px;
-`;
-
-const StockLogo = styled.Image`
-  border-radius: 5px;
-  height: 25px;
-  width: 25px;
-  resize-mode: contain;
-`;
 
 const StockValueContainer = styled.View`
   width: 100%;
@@ -110,11 +95,7 @@ const StockDetailsScreen = ({ route }: StockDetailsScreenProps) => {
             <ActivityIndicator color={COLORS.WHITE} />
           ) : (
             <ScreenScrollView>
-              <StockLogoContainer>
-                <StockLogo
-                  source={state.chosenStockLogo ? { uri: state.chosenStockLogo } : UnavailableLogo}
-                />
-              </StockLogoContainer>
+              <StockLogo logo={state.chosenStockLogo} ticker={stock.ticker} />
               <StockValueContainer>
                 <StockCard stock={stock} />
                 <StockPrice
