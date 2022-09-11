@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import COLORS from '../../assets/colors';
 
 const TryAgainBtnContainer = styled.TouchableOpacity`
-  border: 2px solid #ffff00;
+  border: 2px solid ${COLORS.YELLOW};
   border-radius: 10px;
   align-self: center;
   padding: 5px;
@@ -10,7 +11,7 @@ const TryAgainBtnContainer = styled.TouchableOpacity`
 `;
 
 const TryAgainBtnText = styled.Text`
-  color: #ffff00;
+  color: ${COLORS.YELLOW};
   font-family: 'PoppinsBold';
   font-size: 14px;
 `;

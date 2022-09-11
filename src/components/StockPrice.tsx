@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import COLORS from '../../assets/colors';
 
 interface StockPriceContainerProps {
   raiseUpwards: boolean;
@@ -27,13 +28,13 @@ const StockPriceContainer = styled.View`
 const DollarSign = styled.Text`
   font-size: ${(props: { fontSize: string }) => (props.fontSize ? props.fontSize : '12px')};
   font-family: 'PoppinsRegular';
-  color: #fff;
+  color: ${COLORS.WHITE};
 `;
 
 const StockValue = styled.Text`
   font-size: ${(props: StockValueProps) => (props.fontSize ? props.fontSize : '36px')};
   font-family: ${(props: StockValueProps) => (props.bolded ? 'PoppinsBold' : 'PoppinsRegular')};
-  color: #fff;
+  color: ${COLORS.WHITE};
 `;
 
 const StockPrice = ({

@@ -11,8 +11,10 @@ import Error from '../components/Error';
 import TryAgainBtn from '../components/TryAgainBtn';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../App';
 import useError from '../hooks/useError';
+import { RootStackParamList } from '../components/AppNavigator';
+import ErrorScreen from './ErrorScreen';
+import COLORS from '../../assets/colors';
 
 const ScreenContainer = styled.TouchableWithoutFeedback.attrs({
   onPress: Keyboard.dismiss,
@@ -22,7 +24,7 @@ const ScreenContainer = styled.TouchableWithoutFeedback.attrs({
 `;
 
 const HeaderSafeAreaView = styled.SafeAreaView`
-  background: rgba(0, 0, 0, 0.2);
+  background: ${COLORS.EXTRA_PALE_BLACK};
 `;
 
 const ContentContainer = styled.FlatList`
@@ -90,7 +92,7 @@ const ExploreScreen = ({ navigation }: ExploreScreenProps) => {
     } else {
       const delayedSearch = setTimeout(() => {
         fetchData(false, true);
-      }, 1000);
+      }, 500);
       return () => {
         clearTimeout(delayedSearch);
       };
@@ -108,6 +110,9 @@ const ExploreScreen = ({ navigation }: ExploreScreenProps) => {
               <SearchBar value={searchValue} setValue={setSearchValue} />
             </HeaderSafeAreaView>
             <FlexSafeAreaView>
+              {state.tickers.length === 0 && (
+                <ErrorScreen errorText={'No tickers found.'}></ErrorScreen>
+              )}
               <ContentContainer
                 onMomentumScrollEnd={onMomentumScrollEndHandler}
                 onEndReached={onEndReachedHandler}
@@ -117,7 +122,7 @@ const ExploreScreen = ({ navigation }: ExploreScreenProps) => {
               {showErrorMessage && (
                 <Error withSearchBar setShowErrorMessage={setShowErrorMessage} />
               )}
-              {showLoadMore && <LoadMoreIndicator color={'#ffffff'} />}
+              {showLoadMore && <LoadMoreIndicator color={COLORS.WHITE} />}
               {showTryAgainBtn && <TryAgainBtn onPress={onTryAgainHandler} />}
             </FlexSafeAreaView>
           </Fragment>

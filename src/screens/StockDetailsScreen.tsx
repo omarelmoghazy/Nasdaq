@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { ActivityIndicator } from 'react-native';
 import styled from 'styled-components/native';
-import { RootStackParamList } from '../../App';
 import { UnavailableLogo } from '../../assets/assets';
 import Error from '../components/Error';
 import StockCard from '../components/StockCard';
@@ -15,6 +14,8 @@ import { useActions, useAppState } from '../overmind';
 import { FlexSafeAreaView } from '../shared-styles';
 import SplashScreen from './SplashScreen';
 import ErrorScreen from './ErrorScreen';
+import { RootStackParamList } from '../components/AppNavigator';
+import COLORS from '../../assets/colors';
 
 const ScreenScrollView = styled.ScrollView.attrs({
   contentContainerStyle: {
@@ -25,7 +26,7 @@ const ScreenScrollView = styled.ScrollView.attrs({
 
 const StockLogoContainer = styled.View`
   border-radius: 5px;
-  background: rgba(255, 255, 255, 0.3);
+  background: ${COLORS.EXTRA_PALE_WHITE};
   margin-top: 10px;
   height: 25px;
   width: 25px;
@@ -99,14 +100,14 @@ const StockDetailsScreen = ({ route }: StockDetailsScreenProps) => {
       {isLoadingScreen ? (
         <SplashScreen />
       ) : isErrorScreen ? (
-        <ErrorScreen>
+        <ErrorScreen errorText={'Something went wrong!'}>
           {showErrorMessage && <Error setShowErrorMessage={setShowErrorMessage} />}
           {showTryAgainBtn && <TryAgainBtn onPress={onTryAgainHandler} />}
         </ErrorScreen>
       ) : (
         <FlexSafeAreaView>
           {isLoadingData ? (
-            <ActivityIndicator color={'#ffffff'} />
+            <ActivityIndicator color={COLORS.WHITE} />
           ) : (
             <ScreenScrollView>
               <StockLogoContainer>

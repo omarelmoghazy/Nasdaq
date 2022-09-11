@@ -2,9 +2,10 @@ import React, { useRef, useEffect } from 'react';
 import { Animated, Linking, TouchableOpacity } from 'react-native';
 import styled from 'styled-components/native';
 import { Ionicons } from '@expo/vector-icons';
+import COLORS from '../../assets/colors';
 
 const ErrorContainer = styled(Animated.View)`
-  background: rgba(0, 0, 0, 0.7);
+  background: ${COLORS.PALE_BLACK};
   width: 90%;
   border-radius: 10px;
   padding: 15px;
@@ -16,11 +17,11 @@ const ErrorContainer = styled(Animated.View)`
 const ErrorText = styled.Text`
   font-size: '16px';
   font-family: 'PoppinsRegular';
-  color: #ffffff;
+  color: ${COLORS.WHITE};
 `;
 
 const ErrorLink = styled(ErrorText)`
-  color: #ffff00;
+  color: ${COLORS.YELLOW};
 `;
 
 const CloseIconContainer = styled.View`

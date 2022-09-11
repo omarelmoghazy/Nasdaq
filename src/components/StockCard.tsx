@@ -2,9 +2,10 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import styled from 'styled-components/native';
-import { RootStackParamList } from '../../App';
+import COLORS from '../../assets/colors';
 import { Ticker } from '../overmind/state';
 import { SmallPaleWhitText } from '../shared-styles';
+import { RootStackParamList } from './AppNavigator';
 
 interface StockCardContainerProps {
   withBorder: boolean;
@@ -14,12 +15,12 @@ const StockCardContainer = styled.View`
   padding-bottom: 20px;
   padding-top: 20px;
   border-bottom-width: ${(props: StockCardContainerProps) => (props.withBorder ? '1px' : '0')};
-  border-bottom-color: rgba(255, 255, 255, 0.3);
+  border-bottom-color: ${COLORS.EXTRA_PALE_WHITE};
 `;
 
 const StockCardText = styled.Text`
   font-family: 'PoppinsRegular';
-  color: #fff;
+  color: ${COLORS.WHITE};
 `;
 
 const StockTicker = styled(StockCardText)`
@@ -43,7 +44,7 @@ const StockCard = ({ stock, withBorder, navigation }: StockCardProps) => {
 
   return (
     <StockCardContainer withBorder={withBorder}>
-      <TouchableOpacity onPress={onTickerPressHandler}>
+      <TouchableOpacity onPress={onTickerPressHandler} testID={'stock-card-test'}>
         <StockTicker>{stock.ticker}</StockTicker>
         <SmallPaleWhitText>{stock.name}</SmallPaleWhitText>
       </TouchableOpacity>
