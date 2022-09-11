@@ -3,13 +3,10 @@ import {
   fireEvent,
   render,
   screen,
-  waitFor,
   waitForElementToBeRemoved,
 } from '@testing-library/react-native';
-import ExploreScreen from '../screens/ExploreScreen';
-import { createOvermind, createOvermindMock } from 'overmind';
+import { createOvermind } from 'overmind';
 import { config } from '../overmind';
-import { Provider } from 'overmind-react';
 import AppNavigator from '../components/AppNavigator';
 
 jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');

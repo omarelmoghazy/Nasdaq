@@ -1,5 +1,4 @@
-import { API_KEY } from '@env';
-import * as axios from 'axios';
+import { default as axios } from 'axios';
 
 export const api = {
   async fetchTickers(limit: number, searchValue?: string) {
