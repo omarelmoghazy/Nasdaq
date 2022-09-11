@@ -13,6 +13,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import useError from '../hooks/useError';
 import { RootStackParamList } from '../components/AppNavigator';
+import ErrorScreen from './ErrorScreen';
 import COLORS from '../../assets/colors';
 
 const ScreenContainer = styled.TouchableWithoutFeedback.attrs({
@@ -109,6 +110,9 @@ const ExploreScreen = ({ navigation }: ExploreScreenProps) => {
               <SearchBar value={searchValue} setValue={setSearchValue} />
             </HeaderSafeAreaView>
             <FlexSafeAreaView>
+              {state.tickers.length === 0 && (
+                <ErrorScreen errorText={'No tickers found.'}></ErrorScreen>
+              )}
               <ContentContainer
                 onMomentumScrollEnd={onMomentumScrollEndHandler}
                 onEndReached={onEndReachedHandler}

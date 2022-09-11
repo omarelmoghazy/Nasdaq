@@ -100,7 +100,7 @@ const StockDetailsScreen = ({ route }: StockDetailsScreenProps) => {
       {isLoadingScreen ? (
         <SplashScreen />
       ) : isErrorScreen ? (
-        <ErrorScreen>
+        <ErrorScreen errorText={'Something went wrong!'}>
           {showErrorMessage && <Error setShowErrorMessage={setShowErrorMessage} />}
           {showTryAgainBtn && <TryAgainBtn onPress={onTryAgainHandler} />}
         </ErrorScreen>
